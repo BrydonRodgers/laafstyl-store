@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Basket | LaafStyl Digital Store (working name)</title>
+<meta name="description" content="Your basket">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0e1118">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<div class="preview-banner">PREVIEW - not live. Nothing here is for sale yet.</div>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html">Laaf<span>Styl</span> Store</a>
+<nav><a href="index.html" data-keepv>Products</a><a href="cart.html" data-keepv>Basket<span class="badge-count" data-basket-count style="display:none">0</span></a></nav>
+</div></header>
+<main class="wrap"><div class="pagehero"><h1>Your basket</h1>
+<p class="note">PayFast pays for one product at a time, so each item below has its own Buy button. (A single combined checkout is planned.)</p></div>
+<section class="blk"><div id="cart"><p>Loading...</p></div></section></main>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  Promise.all([fetch('catalog.json').then(r => r.json()), LaafStore.links()]).then(function (res) {
+    var cat = res[0], L = res[1], b = LaafStore.basket().filter(s => cat[s]), el = document.getElementById('cart');
+    if (!b.length) { el.innerHTML = '<p>Your basket is empty. <a href="index.html">Browse products</a>.</p>'; return; }
+    var total = 0, rows = b.map(function (s) {
+      total += cat[s].price; var url = L[s] ? LaafStore.pick(L[s]) : '';
+      return '<tr><td><a href="p/' + s + '.html">' + cat[s].name + '</a><br><button class="remove" data-rm="' + s + '">Remove</button></td><td class="r">R' + cat[s].price.toFixed(0) + '</td><td class="r"><a class="btn" href="' + url + '">Buy</a></td></tr>';
+    }).join('');
+    el.innerHTML = '<table class="basket"><tr><th>Product</th><th class="r">Price</th><th class="r"></th></tr>' + rows + '<tr><td><b>Total if you buy all</b></td><td class="r"><b>R' + total.toFixed(0) + '</b></td><td></td></tr></table>';
+    el.querySelectorAll('[data-rm]').forEach(function (x) { x.onclick = function () { LaafStore.remove(x.dataset.rm); location.reload(); }; });
+  });
+});
+</script>
+<footer><div class="wrap">
+<p>LaafStyl Digital Store (working name) by LaafStyl, Langebaan, South Africa. Prices in South African rand (ZAR). Secure checkout by PayFast; we never see your card details.</p>
+<p>Our products are education and tools, not financial, legal or tax advice.</p>
+</div></footer>
+<script src="assets/store.js"></script>
+</body></html>

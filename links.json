@@ -1,0 +1,5 @@
+{
+  "debt-snowball-planner": {
+    "default": "https://www.payfast.co.za/eng/process?merchant_id=33811799&merchant_key=igwldnq55rvor&return_url=https%3A%2F%2Fshop.laafstyl.org%2Fthanks.html%3Fp%3Ddebt-snowball-planner&cancel_url=https%3A%2F%2Fshop.laafstyl.org%2Fp%2Fdebt-snowball-planner.html&notify_url=https%3A%2F%2Fpay.laafstyl.org%2Fwebhook%2Fpayfast-itn&m_payment_id=store-debt-snowball-planner-default&amount=99.00&item_name=South+African+Debt+Snowball+Planner&item_description=Excel+debt+planner+with+live+formulas%3A+snowball+vs+avalanche%2C+settlement+check+and+phone+script.&custom_str1=default&signature=029f2e5501f06fbe869e09f94be0013b"
+  }
+}
